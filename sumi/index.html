@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブラックジャック</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ゲームスタートボタン -->
+        <div id="startScreen" class="screen active">
+            <button id="startButton" class="start-button">ゲームスタート</button>
+        </div>
+
+        <!-- 掛け金決定パネル -->
+        <div id="bettingScreen" class="screen">
+            <div class="betting-panel">
+                <h2>賭け金を決めてください</h2>
+                
+                <div class="betting-controls">
+                    <!-- スライダー -->
+                    <div class="slider-container">
+                        <label for="betSlider">スライダー:</label>
+                        <input 
+                            type="range" 
+                            id="betSlider" 
+                            class="bet-slider" 
+                            min="10" 
+                            max="1000" 
+                            value="100"
+                            step="10"
+                        >
+                        <div class="slider-labels">
+                            <span>10</span>
+                            <span>500</span>
+                            <span>1000</span>
+                        </div>
+                    </div>
+
+                    <!-- スピナー（矢印付き数値入力） -->
+                    <div class="spinner-container">
+                        <label for="betSpinner">金額:</label>
+                        <input 
+                            type="number" 
+                            id="betSpinner" 
+                            class="bet-spinner" 
+                            min="10" 
+                            max="1000" 
+                            value="100"
+                            step="10"
+                        >
+                    </div>
+                </div>
+
+                <!-- 現在の掛け金表示 -->
+                <div class="current-bet">
+                    <span>現在の掛け金: ¥</span>
+                    <span id="currentBetAmount">100</span>
+                </div>
+
+                <!-- 確定ボタン -->
+                <button id="confirmButton" class="confirm-button">確定</button>
+            </div>
+        </div>
+
+        <!-- ゲーム画面（今後実装） -->
+        <div id="gameScreen" class="screen">
+            <p>ゲーム画面（準備中）</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
