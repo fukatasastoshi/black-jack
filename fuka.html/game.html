@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Blackjack - ブラックジャック</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="casino-table">
+        <h1 id="message">チップを賭けてゲームを開始してください</h1>
+
+        <div class="betting-area">
+            <p>所持チップ: <span id="chips">1000</span></p>
+            <input type="number" id="bet-amount" min="1" max="1000" value="100">
+            <button onclick="placeBet()">BET</button>
+        </div>
+
+        <div class="area">
+            <h3>Dealer (スコア: <span id="dealer-score">?</span>)</h3>
+            <div id="dealer-hand" class="hand"></div>
+        </div>
+
+        <div class="area">
+            <h3>Player (スコア: <span id="player-score">0</span>)</h3>
+            <div id="player-hand" class="hand"></div>
+        </div>
+
+        <div class="controls">
+            <button id="hit-btn" onclick="hit()" disabled>ヒット (HIT)</button>
+            <button id="stand-btn" onclick="stand()" disabled>スタンド (STAND)</button>
+            <button id="double-btn" onclick="doubleDown()" disabled>ダブルダウン (DOUBLE)</button>
+            <button id="restart-btn" onclick="resetGame()">新しいゲーム</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+/*  블랙잭ゲームスタイル */
+
+body {
+    background-color: #1a472a;
+    color: white;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.casino-table {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(180deg, #2d5a3d 0%, #1a472a 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.area {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.area h3 {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    color: #ffd700;
+}
+
+.hand {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    min-height: 120px;
+}
+
+.card {
+    width: 80px;
+    height: 115px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 24px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 14px;
+}
+
+.card[style*="♠"]::before,
+.card[style*="♣"] {
+    color: black;
+}
+
+.card[style*="♥"]::before,
+.card[style*="♦"] {
+    color: #c0392b;
+}
+
+.card.back {
+    background: linear-gradient(135deg, #c0392b 0%, #8e281d 100%);
+    border: 3px solid white;
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.1) 10px,
+        rgba(255,255,255,0.1) 20px
+    );
+}
+
+.betting-area {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.betting-area input {
+    padding: 10px;
+    font-size: 18px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+.controls {
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 24px;
+    margin: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffd700 0%, #daa520 100%);
+    color: #1a472a;
+    font-weight: bold;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+button:disabled {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+}
+
+#chips {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#message {
+    color: #ffd700;
+    font-size: 22px;
+    min-height: 30px;
+}
