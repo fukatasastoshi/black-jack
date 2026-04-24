@@ -1,0 +1,484 @@
+/* ブラックジャック - マルチプレイテーブル */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f3d20 0%, #1a472a 50%, #0f3d20 100%);
+    color: #fff;
+    font-family: "Arial", "Segoe UI", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.casino-table {
+    max-width: 1200px;
+    width: 100%;
+    background: radial-gradient(ellipse at center, #2d5a3d 0%, #1a472a 80%);
+    border: 5px solid #d4af37;
+    border-radius: 400px / 300px;
+    padding: 60px 40px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(212, 175, 55, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+}
+
+.casino-table::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(212, 175, 55, 0.2);
+    border-radius: 400px / 300px;
+    pointer-events: none;
+}
+
+/* テーブルトップ */
+.table-top {
+    text-align: center;
+    z-index: 10;
+}
+
+.table-top h1 {
+    font-size: 40px;
+    color: #d4af37;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+/* ディーラーゾーン */
+.dealer-zone {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    order: -1;
+    z-index: 5;
+}
+
+.dealer-area {
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid #d4af37;
+    border-radius: 20px;
+    padding: 25px 40px;
+    text-align: center;
+    min-width: 350px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dealer-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #d4af37;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.dealer-info {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.score-label {
+    color: #ffd700;
+}
+
+.dealer-score {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 5px;
+    min-width: 40px;
+}
+
+.dealer-hand {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* プレイヤーゾーン */
+.players-zone {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    z-index: 5;
+}
+
+/* プレイヤーシート */
+.player-seat {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+    border: 3px solid rgba(212, 175, 55, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    min-height: 400px;
+    position: relative;
+}
+
+.player-seat.active-player {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.3) 0%, rgba(41, 128, 185, 0.5) 100%);
+    border: 3px solid #3498db;
+    box-shadow: 
+        0 0 20px rgba(52, 152, 219, 0.5),
+        inset 0 0 20px rgba(52, 152, 219, 0.1);
+    transform: scale(1.05);
+}
+
+.player-seat.empty-seat {
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.2) 0%, rgba(40, 40, 40, 0.4) 100%);
+    border: 2px dashed rgba(212, 175, 55, 0.3);
+    opacity: 0.6;
+}
+
+.player-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.empty-message {
+    color: #888;
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.player-info {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 10px;
+}
+
+.chip-display {
+    font-weight: bold;
+    color: #ffd700;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.games-display {
+    color: #87ceeb;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.wins-display {
+    color: #90ee90;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.winrate-display {
+    color: #ffb6c1;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.bet-display {
+    color: #ff6b6b;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.player-hand {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    min-height: 130px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.score-display {
+    width: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #ffd700;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* プレイヤーコントロール */
+.player-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.betting-panel {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.betting-panel input {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #d4af37;
+    border-radius: 5px;
+    background: #fff;
+    color: #1a472a;
+    text-align: center;
+}
+
+.betting-panel button {
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #d4af37, #ffd700);
+    color: #1a472a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.4);
+}
+
+.betting-panel button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(212, 175, 55, 0.6);
+}
+
+.betting-panel button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.game-controls {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.game-controls button {
+    flex: 1;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.game-controls button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.5);
+}
+
+.game-controls button:disabled {
+    background: #95a5a6;
+    border-color: #7f8c8d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* カード */
+.card {
+    width: 70px;
+    height: 100px;
+    background: #fff;
+    border: 2px solid #333;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 22px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card.red {
+    color: #c0392b;
+}
+
+.card.black {
+    color: #000;
+}
+
+.card.back {
+    background: linear-gradient(135deg, #c0392b 0%, #8e281d 100%);
+    color: #fff;
+    border: 3px solid #fff;
+    font-size: 32px;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.15) 10px,
+            rgba(255, 255, 255, 0.15) 20px
+        );
+}
+
+/* メッセージゾーン */
+.message-zone {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+#message {
+    font-size: 18px;
+    color: #ffd700;
+    font-weight: bold;
+    margin: 0;
+    min-height: 24px;
+}
+
+/* ボトムコントロール */
+.bottom-controls {
+    text-align: center;
+    z-index: 10;
+}
+
+.reset-button {
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 12px rgba(39, 174, 96, 0.4);
+}
+
+.reset-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(39, 174, 96, 0.6);
+}
+
+/* レスポンシブ */
+@media (max-width: 1024px) {
+    .casino-table {
+        padding: 40px 20px;
+        border-radius: 300px / 200px;
+    }
+
+    .casino-table::before {
+        border-radius: 300px / 200px;
+    }
+
+    .table-top h1 {
+        font-size: 32px;
+    }
+
+    .players-zone {
+        gap: 20px;
+    }
+
+    .player-seat {
+        min-height: 350px;
+        padding: 15px;
+    }
+
+    .player-hand {
+        min-height: 110px;
+    }
+
+    .card {
+        width: 60px;
+        height: 85px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .casino-table {
+        padding: 30px 15px;
+        gap: 25px;
+        border-radius: 250px / 150px;
+    }
+
+    .casino-table::before {
+        border-radius: 250px / 150px;
+    }
+
+    .table-top h1 {
+        font-size: 28px;
+    }
+
+    .players-zone {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .player-seat {
+        min-height: 300px;
+    }
+
+    .player-seat.active-player {
+        transform: scale(1);
+    }
+
+    .dealer-area {
+        min-width: 280px;
+    }
+
+    .card {
+        width: 55px;
+        height: 78px;
+        font-size: 16px;
+    }
+
+    .player-hand {
+        min-height: 100px;
+    }
+
+    #message {
+        font-size: 16px;
+    }
+}
