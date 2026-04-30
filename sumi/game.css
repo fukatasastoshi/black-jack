@@ -1,0 +1,393 @@
+/* ============ ゲーム画面スタイル ============ */
+#gameScreen {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    padding: 25px;
+}
+
+.game-board {
+    width: 100%;
+    max-width: 1000px;
+    min-height: calc(100vh - 50px);
+    margin: auto;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(200, 200, 200, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.settings-button {
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    z-index: 5;
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #333;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.settings-button:hover {
+    background: #f9f9f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.side-action {
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    color: #333;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dealer-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    grid-column: 1 / 3;
+    grid-row: 1;
+    justify-self: center;
+}
+
+.deck-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+    margin-bottom: 50px;
+}
+
+.player-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    padding: 32px 0 0;
+    margin-top: auto;
+}
+
+.info-pill {
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: #f8f8f8;
+    border: 1px solid #999;
+    color: #333;
+    min-width: auto;
+    text-align: center;
+    box-shadow: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.player-name {
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: #f8f8f8;
+    border: 1px solid #999;
+    color: #333;
+    min-width: auto;
+    text-align: center;
+    box-shadow: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.player-total {
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: #f8f8f8;
+    border: 1px solid #999;
+    color: #333;
+    min-width: auto;
+    text-align: center;
+    box-shadow: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chip-pill {
+    min-width: 100px;
+    background: #fff;
+    border: 2px solid #999;
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.number-panel {
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: #f8f8f8;
+    border: 1px solid #999;
+    color: #333;
+    min-width: auto;
+    text-align: center;
+    box-shadow: none;
+    font-weight: 500;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.number-label {
+    font-size: 10px;
+    color: #999;
+    font-weight: 500;
+}
+
+.number-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.dealer-cards {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.player-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    width: 110px;
+    height: 160px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card.card-front {
+    background: linear-gradient(160deg, #ffffff 0%, #fafafa 100%);
+    color: #121212;
+    border: 2px solid #999;
+}
+
+.card.card-back {
+    background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+    color: #666;
+    border: 2px solid #999;
+}
+
+.deck-card {
+    width: 82.5px;
+    height: 120px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #f5f5f5 0%, #ececec 100%);
+    border: 2px solid #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.player-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.player-total strong {
+    display: block;
+    font-size: 28px;
+    margin-top: 4px;
+    color: #333;
+}
+
+.player-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.game-control {
+    min-width: 140px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff8b3d;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 139, 61, 0.3);
+}
+
+.game-control.secondary {
+    background: #0f8b8d;
+    box-shadow: 0 4px 12px rgba(15, 139, 141, 0.3);
+}
+
+.game-control:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.game-control:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 980px) {
+    .game-board {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        min-height: auto;
+    }
+
+    .dealer-area {
+        align-items: center;
+    }
+
+    .deck-area {
+        align-items: center;
+    }
+}
+
+@media (max-width: 720px) {
+    .game-board {
+        padding: 18px;
+    }
+
+    .card {
+        width: 100px;
+        height: 140px;
+    }
+
+    .player-header,
+    .player-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .player-actions button {
+        width: 100%;
+    }
+}
+
+/* ============ レスポンシブ対応 ============ */
+@media (max-width: 768px) {
+    .betting-panel {
+        width: 85%;
+        height: 60%;
+        min-width: 280px;
+        padding: 20px;
+    }
+
+    .betting-panel h2 {
+        font-size: 20px;
+    }
+
+    .start-button {
+        width: 200px;
+        height: 60px;
+        font-size: 22px;
+    }
+
+    .bet-spinner {
+        width: 100px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .current-bet {
+        font-size: 16px;
+    }
+
+    #currentBetAmount {
+        font-size: 24px;
+    }
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+/* スクリーン管理 */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.screen.active {
+    display: flex;
+}
+
+

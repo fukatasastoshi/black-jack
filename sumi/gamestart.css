@@ -1,0 +1,27 @@
+/* ============ ゲームスタート画面 ============ */
+#startScreen {
+    background: linear-gradient(135deg, #228B22 0%, #006400 100%);
+}
+
+.start-button {
+    width: 250px;
+    height: 80px;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #FF6B6B 0%, #EE5A52 100%);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.start-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.start-button:active {
+    transform: scale(0.98);
+}
